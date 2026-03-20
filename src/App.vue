@@ -1,26 +1,28 @@
 <script>
-import TagsInput from "./components/TagsInput.vue";
+import { ref } from 'vue';
 
 export default {
-  data: () => ({
-    jsFrameworks: ["react.js", "vue.js", "angular"],
-    backendFrameworks: [],
-  }),
-  methods: {
-    handleChange(tags) {
-      this.jsFrameworks = [...tags];
-    },
-  },
+  setup(){
+    const message = ref("Hello")
+    const qty = ref(1)
+    const increment = ()=> qty.value++
+    const decrement = ()=>qty.value--
+    return {
+      message,
+      qty,
+      increment,
+      decrement
+
+    }
+  }
 };
 </script>
 
 <template>
-  <h1>Your favorite frameworks</h1>
-  <div>{{ jsFrameworks }}</div>
-  <tags-input :selected-tags="jsFrameworks" 
-    @change="handleChange" />
+  <h1>{{ message }}</h1>
+  <h2>{{ qty }}</h2>
+  <button @click="increment">+</button>
+  <button @click="decrement">-</button>
+  <input type="text" v-model="message"/>
 
-  <div>{{ backendFrameworks }}</div>
-  <tags-input :selected-tags="backendFrameworks" 
-    @change="backendFrameworks = [...$event]" />
 </template>
