@@ -1,5 +1,5 @@
 <script>
-import { computed, reactive, toRefs } from 'vue'
+import { computed, reactive, toRefs, onMounted, onUnmounted, onUpdated } from 'vue'
 
 export default {
     props: {
@@ -22,6 +22,18 @@ export default {
     const { name, price, qty } = toRefs(item)
 
     const remove = ()=> emit('remove', item)
+
+    onMounted(()=>{
+        console.log('Component mounted.')
+    })
+
+    onUpdated(()=>{
+        console.log('Component updated.')
+    })
+
+    onUnmounted(()=>{
+        console.log('Component unmounted.')
+    })
 
     return {
         remove,
