@@ -1,5 +1,5 @@
 <script>
-import { computed, reactive, ref, toRef, toRefs } from 'vue';
+import { computed, reactive, ref, toRef, toRefs, watch, watchEffect } from 'vue';
 
 export default {
   
@@ -18,6 +18,15 @@ export default {
     }
     const total = computed(() => item.price * item.qty)
     const { name, price, qty } = toRefs(item)
+
+    watch(()=> item.qty, ()=>{
+      if(item.qty === 5)
+      alert("You cannot add more item")
+    }, { immediate: true })
+
+    watchEffect(()=>{
+      console.log('Price change: ',item.price )
+    })
     return {
       qty,
       message, 
