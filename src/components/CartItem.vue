@@ -1,16 +1,16 @@
-<script>
+<script setup>
 import { computed, reactive, toRefs, onMounted, onUnmounted, onUpdated } from 'vue'
 
-export default {
-    props: {
-        cartItem: {
+const props = defineProps({
+    cartItem: {
             type: Object,
             required: true
         }
-    },
-    emits: ['remove'],
-  setup (props, {emit}) {
-    
+})
+
+const emit = defineEmits(['remove'])
+
+
     const item = reactive(props.cartItem)
 
     const increment = () => item.qty++
@@ -35,17 +35,6 @@ export default {
         console.log('Component unmounted.')
     })
 
-    return {
-        remove,
-      qty,
-      increment,
-      decrement,
-      name,
-      price,
-      total
-    }
-  }
-}
 </script>
 
 <template>
